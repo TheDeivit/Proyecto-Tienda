@@ -58,7 +58,7 @@
                   <li class="user-footer">
                     
                     <div class="pull-right">
-                      <a href="{{('/logout')}}" class="btn btn-default btn-flat">Cerrar</a>
+                      <a href="{{url('https://www.google.com') }}" class="btn btn-default btn-flat">SALIR</a>
                     </div>
                   </li>
                 </ul>
