@@ -6,13 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use tienda\Http\Requests\ArticuloFormRequest;
 use tienda\Articulo;
+use tienda\Categoria;
 use DB;
 
 class ArticuloController extends Controller
 {
-public function __construct()
+    public function __construct()
     {
-
+        $this->middleware('auth');
     }
     public function index(Request $request)
     {
@@ -22,6 +23,7 @@ public function __construct()
             $articulos=DB::table('articulo as a')
             ->join('categoria as c', 'a.idcategoria', '=', 'c.idcategoria')
             ->select('a.idarticulo', 'a.nombre', 'a.codigo', 'a.stock','c.nombre as categoria', 'a.descripcion', 'a.imagen', 'a.estado')
+            ->where('a.estado', '=', 'Activo')
             ->where('a.nombre','LIKE','%'.$query.'%')
             ->orwhere('a.codigo','LIKE','%'.$query.'%')
             ->orderBy('a.idarticulo','desc')
@@ -38,8 +40,9 @@ public function __construct()
     public function store (ArticuloFormRequest $request)
     {
         $articulo=new Articulo;
+        $categoria=new Categoria;
         $articulo->idcategoria=$request->get('idcategoria');
-        $categorias->idcategoria=$request->get('idcategoria');
+        $categoria->idcategoria=$request->get('idcategoria');
         $articulo->codigo=$request->get('codigo');
         $articulo->nombre=$request->get('nombre');
         $articulo->stock=$request->get('stock');
@@ -91,6 +94,6 @@ public function __construct()
     {
         $articulo=Articulo::findOrFail($id);
         $articulo->estado='Inactivo';
-        $articulo->delete();
+        $articulo->update();
         return Redirect::to('almacen/articulo');
     }}

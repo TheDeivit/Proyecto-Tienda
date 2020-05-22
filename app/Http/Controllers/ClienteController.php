@@ -12,6 +12,7 @@ class ClienteController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('auth');
 
     }
     public function index(Request $request)
@@ -70,7 +71,7 @@ class ClienteController extends Controller
     {
         $persona=Persona::findOrFail($id);
         $persona->tipo_persona='Inactivo';
-        $persona->delete();
+        $persona->update();
         return Redirect::to('ventas/cliente');
     }
 }

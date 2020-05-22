@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 Route::resource('almacen/categoria', 'CategoriaController');
@@ -23,3 +23,12 @@ Route::resource('ventas/cliente', 'ClienteController');
 Route::resource('compras/proveedor', 'ProveedorController');
 Route::resource('compras/ingreso', 'IngresoController');
 Route::resource('ventas/venta', 'VentaController');
+Route::resource('seguridad/usuario', 'UsuarioController');
+
+Route::auth();
+
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/{slug?}', 'HomeController@index');
+

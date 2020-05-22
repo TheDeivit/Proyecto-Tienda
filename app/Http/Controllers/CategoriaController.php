@@ -15,6 +15,7 @@ class CategoriaController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('auth');
 
     }
     public function index(Request $request)
@@ -63,7 +64,7 @@ class CategoriaController extends Controller
     {
         $categoria=Categoria::findOrFail($id);
         $categoria->condicion='0';
-        $categoria->delete();
+        $categoria->update();
         return Redirect::to('almacen/categoria');
     }
 }

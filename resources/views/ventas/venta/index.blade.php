@@ -26,7 +26,7 @@
 					<td>{{ $ven->nombre}}</td>
 					<td>{{ $ven->tipo_comprobante}}</td>
 					<td>{{ $ven->serie_comprobante}}</td>
-					<td>{{ $ven->total}}</td>
+					<td>{{ $ven->total_venta}}</td>
 					<td>{{ $ven->estado}}</td>
 
 					<td>

@@ -18,6 +18,7 @@ class VentaController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('auth');
 
     }
     
@@ -38,18 +39,18 @@ class VentaController extends Controller
         }
     }
 
-    public function create()
-    {
-        $personas=DB::table('persona')->where('tipo_persona', '=', 'Cliente')->get();
-        $articulos=DB::table('articulo as art')
-        ->join('detalle_ingreso as di', 'art.idarticulo', '=', 'di.idarticulo')
-        ->select(DB::raw('CONCAT(art.codigo, " ", art.nombre) AS articulo'), 'art.idarticulo', 'art.stock', DB::raw('avg(di.precio_venta) as precio_promedio'))
-        ->where('art.estado', '=', 'Activo')
-        ->where('art.stock', '>', '0')
-        ->groupBy('articulo', 'art.idarticulo', 'art.stock')
-        ->get();
-        return view('ventas.venta.create', ["personas"=>$personas, "articulos"=>$articulos ]);
-    }
+   public function create()
+  {
+    $personas=DB::table('persona')->where('tipo_persona', '=', 'Cliente')->get();
+    $articulos=DB::table('articulo as art')
+    ->join('detalle_ingreso as di','art.idarticulo','=','di.idarticulo')
+    ->select(DB::raw('CONCAT(art.codigo," ",art.nombre) AS articulo'), 'art.idarticulo','art.stock',DB::raw('avg(di.precio_venta) as precio_promedio'))
+    ->where('art.estado','=','Activo')
+    ->where('art.stock','>','0')
+    ->groupBy('articulo','art.idarticulo','art.stock')
+    ->get();
+    return view('ventas.venta.create',["personas"=>$personas,"articulos"=>$articulos]);
+  }
 
     public function store(VentaFormRequest $request)
     {
@@ -62,6 +63,7 @@ class VentaController extends Controller
             $venta ->tipo_comprobante=$request->get('tipo_comprobante');
             $venta ->serie_comprobante=$request->get('serie_comprobante');
             $venta ->num_comprobante=$request->get('num_comprobante');
+            $venta->total_venta=$request->get('total_venta');
             $mytime = Carbon::now('UTC');
             $venta->fecha_hora=$mytime->toDateTimeString();
             $venta->impuesto='16';
