@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use tienda\User;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,11 +32,3 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/{slug?}', 'HomeController@index');
 
-Route::get('/send-mail', function(){
-	$details = [
-		'title'=>'Correo de CD-GAMING',
-		'body'=>'BIENVENIDO A LA COMUNIDAD'
-	];
-	\Mail::to('cdgames4all@gmail.com')->send(new\tienda\Mail\TestMail($details));
-	echo "Enviado con exito";
-});
