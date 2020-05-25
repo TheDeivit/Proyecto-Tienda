@@ -149,7 +149,7 @@
     {
         idarticulo=$("#pidarticulo").val();
         articulo=$("#pidarticulo option:selected").text();
-        cantidad=$("#pidarticulo").val();
+        cantidad=$("#pcantidad").val();
         precio_compra=$("#pprecio_compra").val();
         precio_venta=$("#pprecio_venta").val();
 

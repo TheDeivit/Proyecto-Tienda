@@ -46,7 +46,7 @@
   <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
    <div class="form-group">
     <label for="num_comprobante">Número Comprobante</label>
-    <input type="text" name="num_comprobante" requrired value="{{old('num_comprobante')}}" class="form-control" placeholder="Nuúmero Comprobante">
+    <input type="text" name="num_comprobante" requrired value="{{old('num_comprobante')}}" class="form-control" placeholder="Número Comprobante">
    </div>
   </div>
  </div>
@@ -173,7 +173,7 @@
 
     if (idarticulo!="" && cantidad!="" && cantidad>0 && descuento!="" && precio_venta!="")
     {
-      if (stock>=cantidad) {
+      if (Number(stock)>=Number(cantidad)) {
       subtotal[cont]=(cantidad*precio_venta-descuento);
       total=total+subtotal[cont];
 

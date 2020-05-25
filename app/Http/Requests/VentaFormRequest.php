@@ -3,6 +3,8 @@
 namespace tienda\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
+
 
 class VentaFormRequest extends FormRequest
 {
